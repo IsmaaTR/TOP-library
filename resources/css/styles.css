@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --beige-color: #F8EDE3;
+    --light-brown-color: #DFD3C3;
+    --brown-color: #D0B8A8;
+    --brown-red-color: #C5705D;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Roboto', serif;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#header {
+    background-color: var(--brown-color);
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#add-book {
+    position: absolute;
+    right: 20px;
+    background-color: var(--brown-red-color);
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    transition: all 0.1s ease;
+}
+
+#add-book:hover {
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 5px 2px rgba(94, 0, 0, 0.63);
+}
+
+#books-container {
+    background-color: var(--beige-color);
+    flex-grow: 1;
+}
+
+#footer {
+    background-color: var(--brown-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#github-logo {
+    height: 30px;
+    padding-left: 10px;
+}
