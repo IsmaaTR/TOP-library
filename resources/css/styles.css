@@ -55,6 +55,69 @@ body {
 #books-container {
     background-color: var(--beige-color);
     flex-grow: 1;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: min-content;
+    gap: 20px
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: var(--light-brown-color);
+    -webkit-box-shadow: 8px 8px 15px -5px rgba(143,102,0,0.34);
+    -moz-box-shadow: 8px 8px 15px -5px rgba(143,102,0,0.34);
+    box-shadow: 8px 8px 15px -5px rgba(87, 62, 0, 0.397);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    border-bottom: solid 1px black;
+
+}
+
+.finished {
+    border-left: solid 10px green;
+}
+
+.not-finished {
+    border-left: solid 10px orange;
+}
+
+.card-content {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.delete-book {
+    width: 25px;
+    height: auto;
+    border-radius: 5px;
+    background-color: lightcoral;
+    border: none;
+    transition: all 0.1s ease;
+}
+
+.delete-book:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px 2px rgba(150, 0, 0, 0.63);
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.book-author,
+.book-genre {
+    padding: 5px;
 }
 
 #footer {
