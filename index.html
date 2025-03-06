@@ -23,5 +23,42 @@
             </a>
         </div>
     </div>
+
+
+    <!-- Add book dialog -->
+     <dialog id="add-book-modal">
+        <div id="dialog-container">
+            <h1>Add a new Book!</h1>
+            <form id="add-book-form" action="addBook">
+                <div class="form-row">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div class="form-row">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                </div>
+                <div class="form-row">
+                    <label for="genre">Genre</label>
+                    <select name="genre" id="genre-select">
+                        <option value="">Select...</option>
+                        <option value="fiction">Fiction</option>
+                        <option value="romance">Romance</option>
+                        <option value="Mistery">Mistery</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Horror">Horror</option>
+                    </select>
+                </div>
+                <div class="form-check-row">
+                    <label for="completed">Completed?</label>
+                    <input type="checkbox" name="completed" id="completed">
+                </div>
+                <div class="form-submit-row">
+                    <button id="submit-book-form" type="submit">Create book</button>
+                </div>
+            </form>
+        </div>
+     </dialog>
 </body>
 </html>
