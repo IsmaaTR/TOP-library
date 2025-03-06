@@ -1,6 +1,41 @@
 const myLibrary = [];
 
-showBooks();
+initialize();
+
+function initialize() {
+
+    // Add event listener to the add book button
+    const addBookButton = document.querySelector('#add-book');
+    const modal = document.querySelector('#add-book-modal');
+    addBookButton.addEventListener('click', () => {
+        modal.showModal();
+    });
+
+    // Add event listener to close modal if clicked outside
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.close();
+        }
+    });
+    
+    // Add event listener to the form submit
+    const addBookForm = document.querySelector("#add-book-form");
+    addBookForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent connection to the server
+
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const genre = document.getElementById("genre-select").value;
+        const completed = document.getElementById("completed").checked;
+
+        addBook(title, author, genre, completed);
+
+        addBookForm.reset();
+        modal.close();
+    })
+
+    showBooks();
+}
 
 /**
  * Shows the existing books to the user
@@ -97,7 +132,8 @@ function createBookCardContent(author, genre) {
  * @param {*} genre The genre of the book
  * @param {*} finished Marks if the book is finished or not
  */
-function Book(title, author, genre, finished) {
+function Book(id, title, author, genre, finished) {
+    this.id = id;
     this.title = title;
     this.author = author;
     this.genre = genre;
@@ -112,6 +148,12 @@ function Book(title, author, genre, finished) {
  * @param {*} finished Marks if the book is finished or not 
  */
 function addBook(title, author, genre, finished) {
-    const book = new Book(title, author, genre, finished);
+    const id = crypto.randomUUID();
+    const book = new Book(id, title, author, genre, finished);
     myLibrary.push(book);
+
+    //Show the new book
+    const bookContainer = document.querySelector('#books-container');
+    const bookCard = createBookCardDiv(book);
+    bookContainer.appendChild(bookCard);
 }
