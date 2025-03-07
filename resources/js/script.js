@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 
 initialize();
 
@@ -58,7 +58,7 @@ function createBookCardDiv(book) {
     bookCard.classList.add('book-card');
 
     // Card Header
-    const cardHeader = createBookCardHeader(book.title);
+    const cardHeader = createBookCardHeader(book.title, book.id);
     bookCard.appendChild(cardHeader);
 
     // Card content
@@ -76,7 +76,7 @@ function createBookCardDiv(book) {
  * @param {*} title book title
  * @returns the card header
  */
-function createBookCardHeader(title) {
+function createBookCardHeader(title, id) {
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
 
@@ -86,19 +86,34 @@ function createBookCardHeader(title) {
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-book');
+    deleteButton.dataset.id = id;
     deleteButton.insertAdjacentHTML("beforeend", 
         `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
         </svg>`
     );
     deleteButton.addEventListener('click', function() {
-
+        const confirmation = confirm("Are you sure you want to delete this book?");
+        if (confirmation)
+            deleteBook(deleteButton.dataset.id);
     });
 
     cardHeader.appendChild(titleParagraph);
     cardHeader.appendChild(deleteButton);
 
     return cardHeader;
+}
+
+function deleteBook(id) {
+    myLibrary = myLibrary.filter(book => book.id !== id);
+
+    // Delete the book card
+    const container = document.querySelector('#books-container');
+    const bookCards = Array.from(container.children);
+    bookCards.forEach(bookCard => {
+        if (bookCard.querySelector('.delete-book').dataset.id === id)
+            bookCard.remove();
+    });
 }
 
 /**
