@@ -1,4 +1,7 @@
-let myLibrary = [];
+let myLibrary = [
+    new Book(crypto.randomUUID(), 'One Piece', 'Eiichiro Oda', 'Fiction', false),
+    new Book(crypto.randomUUID(), 'Game of Thrones', 'George RR Martin', 'Fiction', true)
+];
 
 initialize();
 
@@ -34,6 +37,14 @@ function initialize() {
         modal.close();
     })
 
+    //Add function to toggle status of a book
+    Book.prototype.toggleRead = function() {
+        if (this.finished)
+            this.finished = false;
+        else
+            this.finished = true;
+    };
+
     showBooks();
 }
 
@@ -58,7 +69,7 @@ function createBookCardDiv(book) {
     bookCard.classList.add('book-card');
 
     // Card Header
-    const cardHeader = createBookCardHeader(book.title, book.id);
+    const cardHeader = createBookCardHeader(bookCard, book);
     bookCard.appendChild(cardHeader);
 
     // Card content
@@ -76,17 +87,19 @@ function createBookCardDiv(book) {
  * @param {*} title book title
  * @returns the card header
  */
-function createBookCardHeader(title, id) {
+function createBookCardHeader(bookCard, book) {
     const cardHeader = document.createElement('div');
     cardHeader.classList.add('card-header');
 
     const titleParagraph = document.createElement('p');
     titleParagraph.classList.add('book-title');
-    titleParagraph.innerText =  title;
+    titleParagraph.innerText =  book.title;
+
+    const buttonsDiv = document.createElement('div');
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-book');
-    deleteButton.dataset.id = id;
+    deleteButton.dataset.id = book.id;
     deleteButton.insertAdjacentHTML("beforeend", 
         `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
@@ -98,8 +111,24 @@ function createBookCardHeader(title, id) {
             deleteBook(deleteButton.dataset.id);
     });
 
+    const finishButton = document.createElement('button');
+    finishButton.classList.add('finish-book');
+    finishButton.insertAdjacentHTML("beforeend", 
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+        </svg>`
+    );
+    finishButton.addEventListener('click', function() {
+        bookCard.classList.toggle("finished");
+        bookCard.classList.toggle("not-finished");
+        book.toggleRead();
+    });
+
+    buttonsDiv.appendChild(finishButton);
+    buttonsDiv.appendChild(deleteButton);
+
     cardHeader.appendChild(titleParagraph);
-    cardHeader.appendChild(deleteButton);
+    cardHeader.appendChild(buttonsDiv);
 
     return cardHeader;
 }

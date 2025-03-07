@@ -173,18 +173,28 @@ dialog select:focus {
     padding-bottom: 10px;
 }
 
-.delete-book {
+.delete-book,
+.finish-book {
     width: 25px;
     height: auto;
     border-radius: 5px;
-    background-color: lightcoral;
     border: none;
     transition: all 0.1s ease;
+    margin: 5px;
 }
 
-.delete-book:hover {
+.delete-book:hover,
+.finish-book:hover {
     cursor: pointer;
     box-shadow: 0 0 5px 2px rgba(150, 0, 0, 0.63);
+}
+
+.delete-book {
+    background-color: lightcoral;
+}
+
+.finish-book {
+    background-color: var(--brown-red-color);
 }
 
 .book-title {
