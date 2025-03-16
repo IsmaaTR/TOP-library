@@ -36,15 +36,7 @@ function initialize() {
         addBookForm.reset();
         modal.close();
     })
-
-    //Add function to toggle status of a book
-    Book.prototype.toggleRead = function() {
-        if (this.finished)
-            this.finished = false;
-        else
-            this.finished = true;
-    };
-
+    
     showBooks();
 }
 
@@ -167,21 +159,6 @@ function createBookCardContent(author, genre) {
     cardContent.appendChild(genreParagraph);
 
     return cardContent;
-}
-
-/**
- * Constructor of a book
- * @param {*} title The title of the book
- * @param {*} author The author of the book
- * @param {*} genre The genre of the book
- * @param {*} finished Marks if the book is finished or not
- */
-function Book(id, title, author, genre, finished) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.finished = finished;
 }
 
 /**
